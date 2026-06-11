@@ -1,10 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EntertainmentTracker.Domain.Common;
 
 namespace EntertainmentTracker.Domain.Users
 {
-    internal class RefreshToken
+    public sealed class RefreshToken : BaseEntity
     {
+        public Guid UserId { get; private set; }
+        public User User { get; private set; } = null!;
+        public string TokenHash { get; private set; } = null!;
+        public DateTime ExpiresAtUtc { get; private set; }
+        public DateTime? RevokedAtUtc { get; private set; }
+
+        private RefreshToken()
+        {
+        }
+
+        public RefreshToken(
+            Guid userId,
+            string tokenHash,
+            DateTime expiresAtUtc)
+        {
+            UserId = userId;
+            TokenHash = tokenHash;
+            ExpiresAtUtc = expiresAtUtc;
+        }
+
+        public void Revoke()
+        {
+            RevokedAtUtc = DateTime.UtcNow;
+            UpdatedAtUtc = DateTime.UtcNow;
+        }
     }
 }
