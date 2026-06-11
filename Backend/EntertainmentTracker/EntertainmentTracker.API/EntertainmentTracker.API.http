@@ -1,0 +1,6 @@
+@EntertainmentTracker.API_HostAddress = http://localhost:5057
+
+GET {{EntertainmentTracker.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
