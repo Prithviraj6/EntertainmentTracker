@@ -1,4 +1,5 @@
-﻿using EntertainmentTracker.Domain.Users;
+﻿using EntertainmentTracker.Domain.Anime;
+using EntertainmentTracker.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntertainmentTracker.Infrastructure.Persistence
@@ -9,8 +10,14 @@ namespace EntertainmentTracker.Infrastructure.Persistence
         {
         }
 
+        //User
         public DbSet<User> Users => Set<User>();
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+
+        //Anime
+        public DbSet<Anime> Animes => Set<Anime>();
+        public DbSet<Genre> Genres => Set<Genre>();
+        public DbSet<AnimeGenre> AnimeGenres => Set<AnimeGenre>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
