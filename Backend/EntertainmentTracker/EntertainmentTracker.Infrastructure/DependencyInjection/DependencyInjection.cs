@@ -1,7 +1,9 @@
-﻿using EntertainmentTracker.Infrastructure.Persistence;
+﻿using EntertainmentTracker.Application.Abstractions.Persistence;
+using EntertainmentTracker.Infrastructure.Persistence;
+using EntertainmentTracker.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 
 namespace EntertainmentTracker.Infrastructure.DependencyInjection
 {
@@ -16,6 +18,12 @@ namespace EntertainmentTracker.Infrastructure.DependencyInjection
                 options.UseNpgsql(
                     configuration.GetConnectionString("Database"));
             });
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
