@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace EntertainmentTracker.Application.Common.Exceptions
 {
-    internal class NotFoundException
+    public sealed class NotFoundException : AppException
     {
+        public NotFoundException(string message)
+            : base(message)
+        {
+        }
     }
 }

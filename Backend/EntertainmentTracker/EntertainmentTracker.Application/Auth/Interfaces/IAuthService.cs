@@ -11,5 +11,13 @@ namespace EntertainmentTracker.Application.Auth.Interfaces
         Task<AuthResponse> LoginAsync(
             LoginRequest request,
             CancellationToken cancellationToken = default);
+
+        Task<AuthResponse> RefreshAsync(
+            RefreshRequest request,
+            CancellationToken cancellationToken = default);
+
+        Task LogoutAsync(
+            LogoutRequest request,
+            CancellationToken cancellationToken = default);
     }
 }

@@ -12,5 +12,7 @@ namespace EntertainmentTracker.Infrastructure.Authentication
         public string SecretKey { get; set; } = string.Empty;
 
         public int AccessTokenExpiryMinutes { get; set; }
+
+        public int RefreshTokenExpiryDays { get; set; }
     }
 }

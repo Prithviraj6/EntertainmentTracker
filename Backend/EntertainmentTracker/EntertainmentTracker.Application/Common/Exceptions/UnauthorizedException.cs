@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace EntertainmentTracker.Application.Common.Exceptions
 {
-    internal class UnauthorizedException
+    public sealed class UnauthorizedException : AppException
     {
+        public UnauthorizedException(string message)
+            : base(message)
+        {
+        }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace EntertainmentTracker.Application.Common.Exceptions
 {
-    internal class AppException
+    public abstract class AppException : Exception
     {
+        protected AppException(string message)
+            : base(message)
+        {
+        }
     }
 }

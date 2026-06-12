@@ -6,6 +6,5 @@ namespace EntertainmentTracker.Application.Auth.Interfaces
     public interface IJwtProvider
     {
         string GenerateAccessToken(User user);
-        DateTime GetAccessTokenExpiryUtc();
     }
 }
