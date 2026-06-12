@@ -1,5 +1,5 @@
 ﻿
-namespace EntertainmentTracker.Domain.Anime
+namespace EntertainmentTracker.Domain.Animes
 {
     public sealed class AnimeGenre
     {
@@ -16,13 +16,13 @@ namespace EntertainmentTracker.Domain.Anime
         }
 
         public static AnimeGenre Create(
-            Guid animeId,
-            Guid genreId)
+            Anime anime,
+            Genre genre)
         {
             return new AnimeGenre
             {
-                AnimeId = animeId,
-                GenreId = genreId
+                Anime = anime,
+                Genre = genre
             };
         }
     }

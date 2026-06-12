@@ -1,6 +1,6 @@
 ﻿using EntertainmentTracker.Domain.Common;
 
-namespace EntertainmentTracker.Domain.Anime
+namespace EntertainmentTracker.Domain.Animes
 {
     public sealed class Genre : BaseEntity
     {

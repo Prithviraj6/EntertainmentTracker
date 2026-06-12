@@ -1,7 +1,7 @@
 ﻿using EntertainmentTracker.Domain.Common;
 using EntertainmentTracker.Domain.Enums;
 
-namespace EntertainmentTracker.Domain.Anime
+namespace EntertainmentTracker.Domain.Animes
 {
     public sealed class Anime : BaseEntity
     {
@@ -65,6 +65,14 @@ namespace EntertainmentTracker.Domain.Anime
                 ImageUrl = imageUrl,
                 TrailerUrl = trailerUrl
             };
+        }
+
+        public void AddGenre(Genre genre)
+        {
+            AnimeGenres.Add(
+                AnimeGenre.Create(
+                    this,
+                    genre));
         }
     }
 }

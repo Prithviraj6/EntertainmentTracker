@@ -1,4 +1,4 @@
-﻿using EntertainmentTracker.Domain.Anime;
+﻿using EntertainmentTracker.Domain.Animes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
