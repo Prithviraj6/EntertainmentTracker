@@ -37,5 +37,22 @@ namespace EntertainmentTracker.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(
+            CancellationToken cancellationToken)
+        {
+            var userId =
+                Guid.Parse(
+                    User.FindFirstValue(
+                        ClaimTypes.NameIdentifier)!);
+
+            var result =
+                await _userAnimeService.GetByUserAsync(
+                    userId,
+                    cancellationToken);
+
+            return Ok(result);
+        }
     }
 }

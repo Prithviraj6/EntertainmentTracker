@@ -33,6 +33,7 @@ namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
             CancellationToken cancellationToken = default)
         {
             return await _dbContext.UserAnime
+                .Include(x => x.Anime)
                 .Where(x => x.UserId == userId)
                 .ToListAsync(cancellationToken);
         }

@@ -73,5 +73,26 @@ namespace EntertainmentTracker.Application.Animes.Services
                 UserScore = userAnime.UserScore
             };
         }
+
+        public async Task<IReadOnlyList<UserAnimeResponse>> GetByUserAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default)
+        {
+            var items =
+                await _userAnimeRepository.GetByUserAsync(
+                    userId,
+                    cancellationToken);
+
+            return items
+                .Select(x => new UserAnimeResponse
+                {
+                    AnimeId = x.AnimeId,
+                    AnimeTitle = x.Anime.Title,
+                    Status = x.Status,
+                    Progress = x.Progress,
+                    UserScore = x.UserScore
+                })
+                .ToList();
+        }
     }
 }

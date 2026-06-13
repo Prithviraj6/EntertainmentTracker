@@ -8,5 +8,9 @@ namespace EntertainmentTracker.Application.Animes.Interfaces
             Guid userId,
             AddUserAnimeRequest request,
             CancellationToken cancellationToken = default);
+
+        Task<IReadOnlyList<UserAnimeResponse>> GetByUserAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default);
     }
 }
