@@ -147,5 +147,34 @@ namespace EntertainmentTracker.Application.Animes.Services
             await _unitOfWork.SaveChangesAsync(
                 cancellationToken);
         }
+
+        public async Task<UserAnimeStatsResponse> GetStatsAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default)
+        {
+            var items =
+                await _userAnimeRepository.GetByUserAsync(
+                    userId,
+                    null,
+                    cancellationToken);
+
+            return new UserAnimeStatsResponse
+            {
+                PlanToWatch = items.Count(
+                    x => x.Status == UserAnimeStatus.PlanToWatch),
+
+                Watching = items.Count(
+                    x => x.Status == UserAnimeStatus.Watching),
+
+                Completed = items.Count(
+                    x => x.Status == UserAnimeStatus.Completed),
+
+                OnHold = items.Count(
+                    x => x.Status == UserAnimeStatus.OnHold),
+
+                Dropped = items.Count(
+                    x => x.Status == UserAnimeStatus.Dropped)
+            };
+        }
     }
 }

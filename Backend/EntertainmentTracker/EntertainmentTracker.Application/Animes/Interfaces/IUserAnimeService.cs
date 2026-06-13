@@ -26,5 +26,9 @@ namespace EntertainmentTracker.Application.Animes.Interfaces
             Guid animeId,
             UpdateStatusRequest request,
             CancellationToken cancellationToken = default);
+
+        Task<UserAnimeStatsResponse> GetStatsAsync(
+            Guid userId,
+            CancellationToken cancellationToken = default);
     }
 }
