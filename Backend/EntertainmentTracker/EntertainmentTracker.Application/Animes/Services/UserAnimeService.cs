@@ -176,5 +176,83 @@ namespace EntertainmentTracker.Application.Animes.Services
                     x => x.Status == UserAnimeStatus.Dropped)
             };
         }
+
+        public async Task DeleteAsync(
+            Guid userId,
+            Guid animeId,
+            CancellationToken cancellationToken = default)
+        {
+            var userAnime =
+                await _userAnimeRepository.GetAsync(
+                    userId,
+                    animeId,
+                    cancellationToken);
+
+            if (userAnime is null)
+            {
+                throw new NotFoundException(
+                    "Anime not found in user list.");
+            }
+
+            await _userAnimeRepository.RemoveAsync(
+                userAnime);
+
+            await _unitOfWork.SaveChangesAsync(
+                cancellationToken);
+        }
+
+        public async Task UpdateScoreAsync(
+            Guid userId,
+            Guid animeId,
+            UpdateScoreRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            var userAnime =
+                await _userAnimeRepository.GetAsync(
+                    userId,
+                    animeId,
+                    cancellationToken);
+
+            if (userAnime is null)
+            {
+                throw new NotFoundException(
+                    "Anime not found in user list.");
+            }
+
+            userAnime.UpdateScore(
+                request.Score);
+
+            await _unitOfWork.SaveChangesAsync(
+                cancellationToken);
+        }
+
+        public async Task<UserAnimeDetailsResponse> GetAsync(
+            Guid userId,
+            Guid animeId,
+            CancellationToken cancellationToken = default)
+        {
+            var userAnime =
+                await _userAnimeRepository.GetAsync(
+                    userId,
+                    animeId,
+                    cancellationToken);
+
+            if (userAnime is null)
+            {
+                throw new NotFoundException(
+                    "Anime not found in user list.");
+            }
+
+            return new UserAnimeDetailsResponse
+            {
+                AnimeId = userAnime.AnimeId,
+                AnimeTitle = userAnime.Anime.Title,
+                Status = userAnime.Status,
+                Progress = userAnime.Progress,
+                UserScore = userAnime.UserScore,
+                StartedAtUtc = userAnime.StartedAtUtc,
+                CompletedAtUtc = userAnime.CompletedAtUtc
+            };
+        }
     }
 }

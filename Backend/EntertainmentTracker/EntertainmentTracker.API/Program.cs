@@ -16,9 +16,18 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 
-
 builder.Services.AddSwaggerGen(options =>
 {
+    options.SwaggerDoc(
+        "v1",
+        new OpenApiInfo
+        {
+            Title = "Entertainment Tracker API",
+            Version = "v1",
+            Description =
+                "Track Anime, Manga and Entertainment Progress"
+        });
+
     options.AddSecurityDefinition(
         "Bearer",
         new OpenApiSecurityScheme
@@ -28,12 +37,13 @@ builder.Services.AddSwaggerGen(options =>
             Scheme = "bearer",
             BearerFormat = "JWT",
             In = ParameterLocation.Header,
-            Description = "Enter JWT token"
+            Description =
+                "Paste only the JWT access token."
         });
 
     options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
     {
-        [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>()
+          [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>()
     });
 });
 

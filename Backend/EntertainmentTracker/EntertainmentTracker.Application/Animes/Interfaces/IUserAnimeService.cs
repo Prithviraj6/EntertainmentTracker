@@ -30,5 +30,21 @@ namespace EntertainmentTracker.Application.Animes.Interfaces
         Task<UserAnimeStatsResponse> GetStatsAsync(
             Guid userId,
             CancellationToken cancellationToken = default);
+
+        Task DeleteAsync(
+            Guid userId,
+            Guid animeId,
+            CancellationToken cancellationToken = default);
+
+        Task UpdateScoreAsync(
+            Guid userId,
+            Guid animeId,
+            UpdateScoreRequest request,
+            CancellationToken cancellationToken = default);
+
+        Task<UserAnimeDetailsResponse> GetAsync(
+            Guid userId,
+            Guid animeId,
+            CancellationToken cancellationToken = default);
     }
 }

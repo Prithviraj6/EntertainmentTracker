@@ -13,6 +13,8 @@ using EntertainmentTracker.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using FluentValidation;
 
 namespace EntertainmentTracker.Infrastructure.DependencyInjection
 {
@@ -50,6 +52,9 @@ namespace EntertainmentTracker.Infrastructure.DependencyInjection
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IUserAnimeRepository, UserAnimeRepository>();
             services.AddScoped<IUserAnimeService, UserAnimeService>();
+
+            services.AddValidatorsFromAssembly(
+                Assembly.Load("EntertainmentTracker.Application"));
 
             return services;
         }

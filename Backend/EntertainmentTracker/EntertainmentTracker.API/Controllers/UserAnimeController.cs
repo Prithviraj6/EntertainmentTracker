@@ -9,6 +9,7 @@ namespace EntertainmentTracker.API.Controllers
 {
     [ApiController]
     [Route("api/user-anime")]
+    [Produces("application/json")]
     [Authorize]
     public sealed class UserAnimeController : ControllerBase
     {
@@ -110,6 +111,63 @@ namespace EntertainmentTracker.API.Controllers
             var result =
                 await _userAnimeService.GetStatsAsync(
                     userId,
+                    cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{animeId:guid}")]
+        public async Task<IActionResult> Delete(
+            Guid animeId,
+            CancellationToken cancellationToken)
+        {
+            var userId =
+                Guid.Parse(
+                    User.FindFirstValue(
+                        ClaimTypes.NameIdentifier)!);
+
+            await _userAnimeService.DeleteAsync(
+                userId,
+                animeId,
+                cancellationToken);
+
+            return NoContent();
+        }
+
+        [HttpPatch("{animeId:guid}/score")]
+        public async Task<IActionResult> UpdateScore(
+            Guid animeId,
+            UpdateScoreRequest request,
+            CancellationToken cancellationToken)
+        {
+            var userId =
+                Guid.Parse(
+                    User.FindFirstValue(
+                        ClaimTypes.NameIdentifier)!);
+
+            await _userAnimeService.UpdateScoreAsync(
+                userId,
+                animeId,
+                request,
+                cancellationToken);
+
+            return NoContent();
+        }
+
+        [HttpGet("{animeId:guid}")]
+        public async Task<IActionResult> Get(
+            Guid animeId,
+            CancellationToken cancellationToken)
+        {
+            var userId =
+                Guid.Parse(
+                    User.FindFirstValue(
+                        ClaimTypes.NameIdentifier)!);
+
+            var result =
+                await _userAnimeService.GetAsync(
+                    userId,
+                    animeId,
                     cancellationToken);
 
             return Ok(result);

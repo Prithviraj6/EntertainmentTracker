@@ -18,5 +18,8 @@ namespace EntertainmentTracker.Application.Abstractions.Persistence
         Task AddAsync(
             UserAnime userAnime,
             CancellationToken cancellationToken = default);
+
+        Task RemoveAsync(
+            UserAnime userAnime);
     }
 }

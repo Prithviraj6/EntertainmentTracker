@@ -4,6 +4,7 @@ using EntertainmentTracker.Application.Auth.Interfaces;
 using EntertainmentTracker.Application.Common.Constants;
 using EntertainmentTracker.Application.Common.Exceptions;
 using EntertainmentTracker.Application.Common.Interfaces;
+using EntertainmentTracker.Application.Common.Security;
 using EntertainmentTracker.Domain.Users;
 
 namespace EntertainmentTracker.Application.Auth.Services
@@ -81,10 +82,14 @@ namespace EntertainmentTracker.Application.Auth.Services
             var refreshToken = Convert.ToBase64String(
                 System.Security.Cryptography.RandomNumberGenerator.GetBytes(64));
 
+            var refreshTokenHash =
+                TokenHasher.Hash(
+                    refreshToken);
+
             var refreshTokenEntity =
                 RefreshToken.Create(
                     user.Id,
-                    refreshToken,
+                    refreshTokenHash,
                     _dateTimeProvider.UtcNow.AddDays(30));
 
             await _refreshTokenRepository.AddAsync(
@@ -150,10 +155,14 @@ namespace EntertainmentTracker.Application.Auth.Services
             var refreshToken = Convert.ToBase64String(
                 System.Security.Cryptography.RandomNumberGenerator.GetBytes(64));
 
+            var refreshTokenHash =
+                TokenHasher.Hash(
+                    refreshToken);
+
             var refreshTokenEntity =
                 RefreshToken.Create(
                     user.Id,
-                    refreshToken,
+                    refreshTokenHash,
                     _dateTimeProvider.UtcNow.AddDays(30));
 
             await _refreshTokenRepository.AddAsync(
@@ -191,8 +200,9 @@ namespace EntertainmentTracker.Application.Auth.Services
             var refreshToken =
                 await _refreshTokenRepository
                     .GetByTokenAsync(
-                        request.RefreshToken,
-                        cancellationToken);
+                TokenHasher.Hash(
+                    request.RefreshToken),
+                cancellationToken);
 
             if (refreshToken is null)
             {
@@ -219,10 +229,14 @@ namespace EntertainmentTracker.Application.Auth.Services
                     System.Security.Cryptography
                         .RandomNumberGenerator.GetBytes(64));
 
+            var newRefreshTokenHash =
+                TokenHasher.Hash(
+                    newRefreshToken);
+
             var newRefreshTokenEntity =
                 RefreshToken.Create(
                     refreshToken.UserId,
-                    newRefreshToken,
+                    newRefreshTokenHash,
                     _dateTimeProvider.UtcNow.AddDays(30));
 
             await _refreshTokenRepository.AddAsync(
@@ -267,7 +281,8 @@ namespace EntertainmentTracker.Application.Auth.Services
             var refreshToken =
                 await _refreshTokenRepository
                     .GetByTokenAsync(
-                        request.RefreshToken,
+                        TokenHasher.Hash(
+                            request.RefreshToken),
                         cancellationToken);
 
             if (refreshToken is null)

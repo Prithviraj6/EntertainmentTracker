@@ -54,7 +54,7 @@ namespace EntertainmentTracker.API.Middleware
 
             var response = new
             {
-                Message = exception.Message
+                message = exception.Message
             };
 
             await context.Response.WriteAsync(

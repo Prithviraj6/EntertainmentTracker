@@ -21,7 +21,7 @@ namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
             Guid animeId,
             CancellationToken cancellationToken = default)
         {
-            return await _dbContext.UserAnime
+            return await _dbContext.UserAnime.Include(x => x.Anime)
                 .FirstOrDefaultAsync(
                     x =>
                         x.UserId == userId &&
@@ -56,6 +56,15 @@ namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
             await _dbContext.UserAnime.AddAsync(
                 userAnime,
                 cancellationToken);
+        }
+
+        public Task RemoveAsync(
+            UserAnime userAnime)
+        {
+            _dbContext.UserAnime.Remove(
+                userAnime);
+
+            return Task.CompletedTask;
         }
     }
 }
