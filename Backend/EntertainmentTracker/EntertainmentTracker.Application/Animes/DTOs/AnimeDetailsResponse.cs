@@ -3,6 +3,7 @@ namespace EntertainmentTracker.Application.Animes.DTOs
 {
     public sealed class AnimeDetailsResponse
     {
+        public Guid Id { get; set; }
         public int MalId { get; set; }
 
         public string Title { get; set; } = string.Empty;

@@ -50,6 +50,7 @@ namespace EntertainmentTracker.Application.Animes.Services
             {
                 return new AnimeDetailsResponse
                 {
+                    Id = existingAnime.Id,
                     MalId = existingAnime.MalId,
                     Title = existingAnime.Title,
                     TitleEnglish = existingAnime.TitleEnglish,
