@@ -11,5 +11,9 @@ namespace EntertainmentTracker.Application.Abstractions.Persistence
         Task AddAsync(
             Anime anime,
             CancellationToken cancellationToken = default);
+
+        Task<Anime?> GetByIdAsync(
+            Guid id,
+            CancellationToken cancellationToken = default);
     }
 }

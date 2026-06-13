@@ -35,5 +35,15 @@ namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
                 anime,
                 cancellationToken);
         }
+
+        public async Task<Anime?> GetByIdAsync(
+            Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Animes
+                .FirstOrDefaultAsync(
+                    x => x.Id == id,
+                    cancellationToken);
+        }
     }
 }

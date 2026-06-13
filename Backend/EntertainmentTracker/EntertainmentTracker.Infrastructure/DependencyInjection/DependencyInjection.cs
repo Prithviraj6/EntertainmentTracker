@@ -49,6 +49,7 @@ namespace EntertainmentTracker.Infrastructure.DependencyInjection
             services.AddScoped<IAnimeRepository, AnimeRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IUserAnimeRepository, UserAnimeRepository>();
+            services.AddScoped<IUserAnimeService, UserAnimeService>();
 
             return services;
         }
