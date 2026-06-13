@@ -29,20 +29,13 @@ namespace EntertainmentTracker.Infrastructure.DependencyInjection
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.Configure<JwtOptions>(configuration.GetSection(
                 JwtOptions.SectionName));
-
             services.AddScoped<IJwtProvider, JwtProvider>();
-
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
-
             services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
-
             services.AddScoped<IAuthService, AuthService>();
 
             //Anime
@@ -53,10 +46,9 @@ namespace EntertainmentTracker.Infrastructure.DependencyInjection
             });
 
             services.AddScoped<IAnimeService, AnimeService>();
-
             services.AddScoped<IAnimeRepository, AnimeRepository>();
-
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IUserAnimeRepository, UserAnimeRepository>();
 
             return services;
         }

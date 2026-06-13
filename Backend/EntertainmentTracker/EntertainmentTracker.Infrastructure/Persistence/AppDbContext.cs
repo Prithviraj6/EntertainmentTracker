@@ -18,6 +18,7 @@ namespace EntertainmentTracker.Infrastructure.Persistence
         public DbSet<Anime> Animes => Set<Anime>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<AnimeGenre> AnimeGenres => Set<AnimeGenre>();
+        public DbSet<UserAnime> UserAnime => Set<UserAnime>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
