@@ -1,4 +1,5 @@
 ﻿using EntertainmentTracker.Application.Animes.DTOs;
+using EntertainmentTracker.Domain.Enums;
 
 namespace EntertainmentTracker.Application.Animes.Interfaces
 {
@@ -11,6 +12,19 @@ namespace EntertainmentTracker.Application.Animes.Interfaces
 
         Task<IReadOnlyList<UserAnimeResponse>> GetByUserAsync(
             Guid userId,
+            UserAnimeStatus? status,
+            CancellationToken cancellationToken = default);
+
+        Task UpdateProgressAsync(
+            Guid userId,
+            Guid animeId,
+            UpdateProgressRequest request,
+            CancellationToken cancellationToken = default);
+
+        Task UpdateStatusAsync(
+            Guid userId,
+            Guid animeId,
+            UpdateStatusRequest request,
             CancellationToken cancellationToken = default);
     }
 }

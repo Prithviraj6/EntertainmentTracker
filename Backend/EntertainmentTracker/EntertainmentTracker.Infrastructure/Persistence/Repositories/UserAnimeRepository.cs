@@ -1,5 +1,6 @@
 ﻿using EntertainmentTracker.Application.Abstractions.Persistence;
 using EntertainmentTracker.Domain.Animes;
+using EntertainmentTracker.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
@@ -30,12 +31,22 @@ namespace EntertainmentTracker.Infrastructure.Persistence.Repositories
 
         public async Task<IReadOnlyList<UserAnime>> GetByUserAsync(
             Guid userId,
+            UserAnimeStatus? status,
             CancellationToken cancellationToken = default)
         {
-            return await _dbContext.UserAnime
-                .Include(x => x.Anime)
-                .Where(x => x.UserId == userId)
-                .ToListAsync(cancellationToken);
+            var query =
+                _dbContext.UserAnime
+                    .Include(x => x.Anime)
+                    .Where(x => x.UserId == userId);
+
+            if (status.HasValue)
+            {
+                query = query.Where(
+                    x => x.Status == status.Value);
+            }
+
+            return await query.ToListAsync(
+                cancellationToken);
         }
 
         public async Task AddAsync(

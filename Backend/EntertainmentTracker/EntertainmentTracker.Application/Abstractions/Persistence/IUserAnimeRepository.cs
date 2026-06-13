@@ -1,4 +1,5 @@
 ﻿using EntertainmentTracker.Domain.Animes;
+using EntertainmentTracker.Domain.Enums;
 
 namespace EntertainmentTracker.Application.Abstractions.Persistence
 {
@@ -11,6 +12,7 @@ namespace EntertainmentTracker.Application.Abstractions.Persistence
 
         Task<IReadOnlyList<UserAnime>> GetByUserAsync(
             Guid userId,
+            UserAnimeStatus? status,
             CancellationToken cancellationToken = default);
 
         Task AddAsync(
