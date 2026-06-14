@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav>
+        <nav className="navbar">
             <Link to="/dashboard">
                 Dashboard
             </Link>

@@ -1,0 +1,7 @@
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 16px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}

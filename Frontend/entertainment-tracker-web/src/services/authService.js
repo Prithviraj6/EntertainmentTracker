@@ -17,3 +17,20 @@ export async function login(data) {
 
     return response.data;
 }
+
+export async function refreshToken() {
+    const refreshToken =
+        localStorage.getItem(
+            "refreshToken"
+        );
+
+    const response =
+        await apiClient.post(
+            "/auth/refresh",
+            {
+                refreshToken
+            }
+        );
+
+    return response.data;
+}

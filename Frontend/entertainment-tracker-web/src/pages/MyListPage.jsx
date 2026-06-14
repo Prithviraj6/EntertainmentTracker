@@ -9,6 +9,8 @@ import {
 import { UserAnimeStatus } from "../constants/userAnimeStatus";
 
 import Navbar from "../components/Navbar";
+import PageContainer from "../components/PageContainer";
+import "./MyListPage.css";
 
 export default function MyListPage() {
   const [animeList, setAnimeList] =
@@ -75,152 +77,156 @@ export default function MyListPage() {
   }
 
   return (
-    <div>
-      <Navbar />
-
-      <h1>My Anime List</h1>
-
+    <PageContainer>
       <div>
-        <label>
-          Filter:
-        </label>
+        <Navbar />
 
-        <select
-          value={statusFilter}
-          onChange={(e) =>
-            setStatusFilter(
-              e.target.value
-            )
-          }
-        >
-          <option value="">
-            All
-          </option>
+        <h1>My Anime List</h1>
 
-          <option value="1">
-            Plan To Watch
-          </option>
+        <div>
+          <label>
+            Filter:
+          </label>
 
-          <option value="2">
-            Watching
-          </option>
-
-          <option value="3">
-            Completed
-          </option>
-
-          <option value="4">
-            On Hold
-          </option>
-
-          <option value="5">
-            Dropped
-          </option>
-        </select>
-      </div>
-
-      {animeList.map(anime => (
-        <div key={anime.animeId}>
-          <h3>
-            {anime.animeTitle}
-          </h3>
-
-          <div>
-            Status :
-
-            <select
-              value={anime.status}
-              onChange={(e) =>
-                handleStatusChange(
-                  anime.animeId,
-                  e.target.value
-                )
-              }
-            >
-              <option value="1">
-                Plan To Watch
-              </option>
-
-              <option value="2">
-                Watching
-              </option>
-
-              <option value="3">
-                Completed
-              </option>
-
-              <option value="4">
-                On Hold
-              </option>
-
-              <option value="5">
-                Dropped
-              </option>
-            </select>
-          </div>
-
-          <div>
-            Progress :
-
-            <input
-              type="number"
-              min="0"
-              defaultValue={
-                anime.progress
-              }
-            />
-
-            <button
-              onClick={(e) =>
-                handleProgressChange(
-                  anime.animeId,
-                  e.target
-                    .previousSibling
-                    .value
-                )
-              }
-            >
-              Save Progress
-            </button>
-          </div>
-
-          <div>
-            Score :
-
-            <input
-              type="number"
-              min="1"
-              max="10"
-              defaultValue={
-                anime.userScore ?? ""
-              }
-            />
-
-            <button
-              onClick={(e) =>
-                handleScoreChange(
-                  anime.animeId,
-                  e.target
-                    .previousSibling
-                    .value
-                )
-              }
-            >
-              Save Score
-            </button>
-          </div>
-
-          <button
-            onClick={() =>
-              handleDelete(
-                anime.animeId
+          <select
+            value={statusFilter}
+            onChange={(e) =>
+              setStatusFilter(
+                e.target.value
               )
             }
           >
-            Delete
-          </button>
+            <option value="">
+              All
+            </option>
+
+            <option value="1">
+              Plan To Watch
+            </option>
+
+            <option value="2">
+              Watching
+            </option>
+
+            <option value="3">
+              Completed
+            </option>
+
+            <option value="4">
+              On Hold
+            </option>
+
+            <option value="5">
+              Dropped
+            </option>
+          </select>
         </div>
-      ))}
-    </div>
+
+        <div className="my-list-grid">
+          {animeList.map(anime => (
+            <div key={anime.animeId}>
+              <h3>
+                {anime.animeTitle}
+              </h3>
+
+              <div>
+                Status :
+
+                <select
+                  value={anime.status}
+                  onChange={(e) =>
+                    handleStatusChange(
+                      anime.animeId,
+                      e.target.value
+                    )
+                  }
+                >
+                  <option value="1">
+                    Plan To Watch
+                  </option>
+
+                  <option value="2">
+                    Watching
+                  </option>
+
+                  <option value="3">
+                    Completed
+                  </option>
+
+                  <option value="4">
+                    On Hold
+                  </option>
+
+                  <option value="5">
+                    Dropped
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                Progress :
+
+                <input
+                  type="number"
+                  min="0"
+                  defaultValue={
+                    anime.progress
+                  }
+                />
+
+                <button
+                  onClick={(e) =>
+                    handleProgressChange(
+                      anime.animeId,
+                      e.target
+                        .previousSibling
+                        .value
+                    )
+                  }
+                >
+                  Save Progress
+                </button>
+              </div>
+
+              <div>
+                Score :
+
+                <input
+                  type="number"
+                  min="1"
+                  max="10"
+                  defaultValue={
+                    anime.userScore ?? ""
+                  }
+                />
+
+                <button
+                  onClick={(e) =>
+                    handleScoreChange(
+                      anime.animeId,
+                      e.target
+                        .previousSibling
+                        .value
+                    )
+                  }
+                >
+                  Save Score
+                </button>
+              </div>
+
+              <button
+                onClick={() =>
+                  handleDelete(
+                    anime.animeId
+                  )
+                }
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </PageContainer>
   );
 }

@@ -4,6 +4,39 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --primary: #3b82f6;
+  --text: #f5f5f5;
+  --border: #333;
+}
+
 body {
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, sans-serif;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+
+input,
+select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

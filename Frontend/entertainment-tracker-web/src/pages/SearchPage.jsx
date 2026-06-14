@@ -3,6 +3,9 @@ import { searchAnime } from "../services/animeService";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
+import PageContainer from "../components/PageContainer";
+import "../components/AnimeCard.css";
+import "./SearchPage.css";
 
 export default function SearchPage() {
   const navigate =
@@ -39,46 +42,59 @@ export default function SearchPage() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <PageContainer>
+      <div>
+        <Navbar />
 
-      <h1>Search Anime</h1>
+        <h1>Search Anime</h1>
 
-      <input
-        type="text"
-        placeholder="Search anime..."
-        value={query}
-        onChange={(e) =>
-          setQuery(e.target.value)
-        }
-      />
-
-      <button
-        onClick={handleSearch}
-      >
-        Search
-      </button>
-
-      {loading && (
-        <p>Loading...</p>
-      )}
-
-      {results.map(anime => (
-        <div
-          key={anime.malId}
-          onClick={() =>
-            navigate(
-              `/anime/${anime.malId}`
-            )
+        <input
+          type="text"
+          placeholder="Search anime..."
+          value={query}
+          onChange={(e) =>
+            setQuery(e.target.value)
           }
-        >
-          <h3>{anime.title}</h3>
+        />
 
-          <p>
-            Score: {anime.score}
-          </p>
+        <button
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+
+        {loading && (
+          <p>Loading...</p>
+        )}
+
+        <div className="search-results">
+          {results.map(anime => (
+            <div
+              className="anime-card"
+              key={anime.malId}
+              onClick={() =>
+                navigate(
+                  `/anime/${anime.malId}`
+                )
+              }
+            >
+              <img
+                src={anime.imageUrl}
+                alt={anime.title}
+                width="100"
+              />
+
+              <div>
+                <h3>{anime.title}</h3>
+
+                <p>
+                  Score: {anime.score}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </PageContainer>
   );
 }

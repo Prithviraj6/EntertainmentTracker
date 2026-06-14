@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
 import { getStats } from "../services/userAnimeService";
+import PageContainer from "../components/PageContainer";
+import "./DashboardPage.css";
 
 export default function DashboardPage() {
   const [stats, setStats] =
@@ -34,36 +36,43 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-
+    <>
       <Navbar />
 
-      <h1>Dashboard</h1>
+      <PageContainer>
 
-      <p>
-        Plan To Watch:
-        {stats?.planToWatch}
-      </p>
+        <h1>Dashboard</h1>
 
-      <p>
-        Watching:
-        {stats?.watching}
-      </p>
+        <div className="stats-grid">
 
-      <p>
-        Completed:
-        {stats?.completed}
-      </p>
+          <div className="stat-card">
+            <p>Plan To Watch</p>
+            <h2>{stats?.planToWatch}</h2>
+          </div>
 
-      <p>
-        On Hold:
-        {stats?.onHold}
-      </p>
+          <div className="stat-card">
+            <p>Watching</p>
+            <h2>{stats?.watching}</h2>
+          </div>
 
-      <p>
-        Dropped:
-        {stats?.dropped}
-      </p>
-    </div>
+          <div className="stat-card">
+            <p>Completed</p>
+            <h2>{stats?.completed}</h2>
+          </div>
+
+          <div className="stat-card">
+            <p>On Hold</p>
+            <h2>{stats?.onHold}</h2>
+          </div>
+
+          <div className="stat-card">
+            <p>Dropped</p>
+            <h2>{stats?.dropped}</h2>
+          </div>
+
+        </div>
+
+      </PageContainer>
+    </>
   );
 }

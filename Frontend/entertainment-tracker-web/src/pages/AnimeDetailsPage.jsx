@@ -4,6 +4,7 @@ import { getAnime } from "../services/animeService";
 import { addAnime } from "../services/userAnimeService";
 
 import Navbar from "../components/Navbar";
+import PageContainer from "../components/PageContainer";
 
 export default function AnimeDetailsPage() {
   const { malId } =
@@ -62,63 +63,97 @@ export default function AnimeDetailsPage() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <PageContainer>
+      <div>
+        <Navbar />
 
-      <h1>
-        {anime.title}
-      </h1>
+        <div
+          style={{
+            display: "flex",
+            gap: "24px"
+          }}
+        >
+          <img
+            src={anime.imageUrl}
+            alt={anime.title}
+            width="250"
+          />
 
-      <p>
-        Score:
-        {anime.score}
-      </p>
+          <div>
+            <h1>
+              {anime.title}
+            </h1>
 
-      <p>
-        Episodes:
-        {anime.episodes}
-      </p>
+            <p>
+              Score: {anime.score}
+            </p>
 
-      <p>
-        {anime.synopsis}
-      </p>
+            <p>
+              Episodes:
+              {anime.episodes}
+            </p>
 
-      <h3>Add To List</h3>
+            <p>
+              Genres:
+              {" "}
+              {anime.genres
+                ?.map(g => g.name)
+                .join(", ")}
+            </p>
+          </div>
+        </div>
 
-      <select
-        value={status}
-        onChange={(e) =>
-          setStatus(
-            Number(e.target.value)
-          )
-        }
-      >
-        <option value={1}>
-          Plan To Watch
-        </option>
+        <p>
+          Score:
+          {anime.score}
+        </p>
 
-        <option value={2}>
-          Watching
-        </option>
+        <p>
+          Episodes:
+          {anime.episodes}
+        </p>
 
-        <option value={3}>
-          Completed
-        </option>
+        <p>
+          {anime.synopsis}
+        </p>
 
-        <option value={4}>
-          On Hold
-        </option>
+        <h3>Add To List</h3>
 
-        <option value={5}>
-          Dropped
-        </option>
-      </select>
+        <select
+          value={status}
+          onChange={(e) =>
+            setStatus(
+              Number(e.target.value)
+            )
+          }
+        >
+          <option value={1}>
+            Plan To Watch
+          </option>
 
-      <button
-        onClick={handleAdd}
-      >
-        Add To List
-      </button>
-    </div>
+          <option value={2}>
+            Watching
+          </option>
+
+          <option value={3}>
+            Completed
+          </option>
+
+          <option value={4}>
+            On Hold
+          </option>
+
+          <option value={5}>
+            Dropped
+          </option>
+        </select>
+
+        <button
+          onClick={handleAdd}
+        >
+          Add To List
+        </button>
+      </div>
+    </PageContainer>
   );
 }

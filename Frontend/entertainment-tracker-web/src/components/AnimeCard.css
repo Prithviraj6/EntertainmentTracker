@@ -1,0 +1,33 @@
+.anime-card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  transition: 0.2s ease;
+
+  display: flex;
+
+  gap: 16px;
+
+  padding: 16px;
+}
+
+.anime-card:hover {
+  transform: translateY(-3px);
+
+  cursor: pointer;
+}
+
+.anime-card img {
+  border-radius: 8px;
+
+  width: 100px;
+
+  height: 140px;
+
+  object-fit: cover;
+}
